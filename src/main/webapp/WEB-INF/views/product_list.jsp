@@ -49,9 +49,9 @@
                         <p class="price">¥ <fmt:formatNumber value="${product.price}" pattern="#,##0.00"/></p>
                         <p class="sales">已售 ${product.sales} 件</p>
                         <div class="product-actions">
-                            <a href="${pageContext.request.contextPath}/product/detail/${product.id}" class="btn btn-primary">查看详情</a>
+                            <a href="${pageContext.request.contextPath}/product/detail/${product.id}" class="btn btn-primary btn-sm">查看详情</a>
                             <c:if test="${sessionScope.loginUser != null}">
-                                <a href="${pageContext.request.contextPath}/cart/add?productId=${product.id}" class="btn btn-success">加入购物车</a>
+                                <a href="${pageContext.request.contextPath}/cart/add?productId=${product.id}" class="btn btn-success btn-sm">加入购物车</a>
                             </c:if>
                         </div>
                     </div>
@@ -64,4 +64,5 @@
     </div>
 </div>
 
+<%@ include file="pagination.jsp" %>
 <%@ include file="footer.jsp" %>

@@ -19,4 +19,17 @@ public interface ProductService {
     boolean update(Product product);
 
     boolean delete(Integer id);
+
+    // 分页查询
+    List<Product> getAll(int offset, int limit);
+
+    int countAll();
+
+    List<Product> getByCategoryId(Integer categoryId, int offset, int limit);
+
+    int countByCategoryId(Integer categoryId);
+
+    List<Product> search(String keyword, int offset, int limit);
+
+    int countByKeyword(String keyword);
 }

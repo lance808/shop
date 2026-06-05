@@ -16,6 +16,8 @@ import java.util.List;
 @Controller
 public class ProductController {
 
+    private static final int PAGE_SIZE = 25;
+
     @Autowired
     private ProductService productService;
 
@@ -23,11 +25,19 @@ public class ProductController {
     private CategoryService categoryService;
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(@RequestParam(defaultValue = "1") int page, Model model) {
+        int total = productService.countAll();
+        int totalPages = (int) Math.ceil((double) total / PAGE_SIZE);
+        int offset = (page - 1) * PAGE_SIZE;
+
         List<Category> categories = categoryService.getAll();
-        List<Product> products = productService.getAll();
+        List<Product> products = productService.getAll(offset, PAGE_SIZE);
+
         model.addAttribute("categories", categories);
         model.addAttribute("products", products);
+        model.addAttribute("page", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("total", total);
         return "index";
     }
 
@@ -44,33 +54,60 @@ public class ProductController {
     @RequestMapping("/product/list")
     public String list(@RequestParam(required = false) Integer categoryId,
                        @RequestParam(required = false) String keyword,
+                       @RequestParam(defaultValue = "1") int page,
                        Model model) {
         List<Category> categories = categoryService.getAll();
         List<Product> products;
+        int total;
+        int totalPages;
+
         if (keyword != null && !keyword.trim().isEmpty()) {
-            products = productService.search(keyword.trim());
+            String kw = keyword.trim();
+            total = productService.countByKeyword(kw);
+            totalPages = (int) Math.ceil((double) total / PAGE_SIZE);
+            int offset = (page - 1) * PAGE_SIZE;
+            products = productService.search(kw, offset, PAGE_SIZE);
         } else if (categoryId != null && categoryId > 0) {
-            products = productService.getByCategoryId(categoryId);
+            total = productService.countByCategoryId(categoryId);
+            totalPages = (int) Math.ceil((double) total / PAGE_SIZE);
+            int offset = (page - 1) * PAGE_SIZE;
+            products = productService.getByCategoryId(categoryId, offset, PAGE_SIZE);
         } else {
-            products = productService.getAll();
+            total = productService.countAll();
+            totalPages = (int) Math.ceil((double) total / PAGE_SIZE);
+            int offset = (page - 1) * PAGE_SIZE;
+            products = productService.getAll(offset, PAGE_SIZE);
         }
+
         model.addAttribute("categories", categories);
         model.addAttribute("products", products);
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("total", total);
         return "product_list";
     }
 
     @RequestMapping("/search")
-    public String search(@RequestParam("keyword") String keyword, Model model) {
+    public String search(@RequestParam("keyword") String keyword,
+                         @RequestParam(defaultValue = "1") int page,
+                         Model model) {
         if (keyword == null || keyword.trim().isEmpty()) {
             return "redirect:/";
         }
-        List<Product> products = productService.search(keyword.trim());
+        String kw = keyword.trim();
+        int total = productService.countByKeyword(kw);
+        int totalPages = (int) Math.ceil((double) total / PAGE_SIZE);
+        int offset = (page - 1) * PAGE_SIZE;
+        List<Product> products = productService.search(kw, offset, PAGE_SIZE);
         List<Category> categories = categoryService.getAll();
         model.addAttribute("categories", categories);
         model.addAttribute("products", products);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("keyword", kw);
+        model.addAttribute("page", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("total", total);
         return "product_list";
     }
 }

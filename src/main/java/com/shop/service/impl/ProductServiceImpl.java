@@ -53,4 +53,36 @@ public class ProductServiceImpl implements ProductService {
     public boolean delete(Integer id) {
         return productDao.deleteById(id) > 0;
     }
+
+    // ========== 分页查询 ==========
+
+    @Override
+    public List<Product> getAll(int offset, int limit) {
+        return productDao.selectAllWithPage(offset, limit);
+    }
+
+    @Override
+    public int countAll() {
+        return productDao.countAll();
+    }
+
+    @Override
+    public List<Product> getByCategoryId(Integer categoryId, int offset, int limit) {
+        return productDao.selectByCategoryIdWithPage(categoryId, offset, limit);
+    }
+
+    @Override
+    public int countByCategoryId(Integer categoryId) {
+        return productDao.countByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<Product> search(String keyword, int offset, int limit) {
+        return productDao.selectByKeywordWithPage(keyword, offset, limit);
+    }
+
+    @Override
+    public int countByKeyword(String keyword) {
+        return productDao.countByKeyword(keyword);
+    }
 }
