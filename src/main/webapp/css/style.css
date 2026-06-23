@@ -632,6 +632,127 @@ a:hover {
     padding: 0 8px;
 }
 
+/* ========== Stats Cards ========== */
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 24px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1890ff;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #999;
+}
+
+.stat-pending .stat-number { color: #fa8c16; }
+.stat-paid .stat-number { color: #1890ff; }
+.stat-shipped .stat-number { color: #722ed1; }
+.stat-completed .stat-number { color: #52c41a; }
+
+/* ========== Review ========== */
+.review-section {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.review-section h3 {
+    margin-bottom: 15px;
+}
+
+.review-form {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.rating-select {
+    width: auto !important;
+    font-size: 16px !important;
+}
+
+.review-card {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+.review-header {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.star-rating {
+    color: #fa8c16;
+    letter-spacing: 2px;
+}
+
+.review-time {
+    color: #999;
+    font-size: 13px;
+    margin-left: auto;
+}
+
+.review-content {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ========== Address Card ========== */
+.address-card {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address-info {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.address-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
 /* ========== Responsive ========== */
 @media (max-width: 768px) {
     .home-layout {
@@ -648,5 +769,8 @@ a:hover {
     }
     .detail-img {
         width: 100%;
+    }
+    .stats-cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

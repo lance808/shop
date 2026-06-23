@@ -18,6 +18,7 @@
         </div>
         <ul class="admin-nav">
             <li><a href="${pageContext.request.contextPath}/admin/index">控制台</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/stats">数据统计</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/product/list">商品管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/category/list">分类管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/order/list">订单管理</a></li>

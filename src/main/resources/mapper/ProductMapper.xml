@@ -138,4 +138,37 @@
         UPDATE product SET stock = stock - #{quantity}, sales = sales + #{quantity}
         WHERE id = #{id} AND stock >= #{quantity}
     </update>
+
+    <!-- ========== 后台统计 ========== -->
+    <select id="countByStatus" resultType="int">
+        SELECT COUNT(*) FROM product WHERE status = #{status}
+    </select>
+
+    <select id="sumSales" resultType="int">
+        SELECT COALESCE(SUM(sales), 0) FROM product
+    </select>
+
+    <select id="sumStock" resultType="int">
+        SELECT COALESCE(SUM(stock), 0) FROM product
+    </select>
+
+    <select id="selectTopSales" resultMap="productMap">
+        SELECT p.*, c.name AS category_name
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.id
+        ORDER BY p.sales DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="countOrdersByStatus" resultType="int">
+        SELECT COUNT(*) FROM `order` WHERE status = #{status}
+    </select>
+
+    <select id="sumOrderTotal" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(total_price), 0) FROM `order` WHERE status != 'cancelled'
+    </select>
+
+    <select id="countUsers" resultType="int">
+        SELECT COUNT(*) FROM user
+    </select>
 </mapper>

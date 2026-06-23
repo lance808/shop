@@ -32,4 +32,19 @@ public interface ProductService {
     List<Product> search(String keyword, int offset, int limit);
 
     int countByKeyword(String keyword);
+
+    // 后台统计
+    int countByStatus(int status);
+
+    int sumSales();
+
+    int sumStock();
+
+    List<Product> getTopSales(int limit);
+
+    int countOrdersByStatus(String status);
+
+    java.math.BigDecimal sumOrderTotal();
+
+    int countUsers();
 }

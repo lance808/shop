@@ -26,7 +26,9 @@
                 <c:when test="${sessionScope.loginUser != null}">
                     <span>欢迎，${sessionScope.loginUser.realName != null ? sessionScope.loginUser.realName : sessionScope.loginUser.username}</span>
                     <a href="${pageContext.request.contextPath}/cart/list">购物车</a>
+                    <a href="${pageContext.request.contextPath}/favorite/list">收藏夹</a>
                     <a href="${pageContext.request.contextPath}/order/list">我的订单</a>
+                    <a href="${pageContext.request.contextPath}/address/list">收货地址</a>
                     <a href="${pageContext.request.contextPath}/user/profile">个人中心</a>
                     <c:if test="${sessionScope.loginUser.role == 'admin'}">
                         <a href="${pageContext.request.contextPath}/admin/index">后台管理</a>

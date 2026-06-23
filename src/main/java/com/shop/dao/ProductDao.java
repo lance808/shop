@@ -39,4 +39,19 @@ public interface ProductDao {
                                            @Param("limit") int limit);
 
     int countByKeyword(@Param("keyword") String keyword);
+
+    // 后台统计
+    int countByStatus(@Param("status") int status);
+
+    int sumSales();
+
+    int sumStock();
+
+    List<Product> selectTopSales(@Param("limit") int limit);
+
+    int countOrdersByStatus(@Param("status") String status);
+
+    java.math.BigDecimal sumOrderTotal();
+
+    int countUsers();
 }

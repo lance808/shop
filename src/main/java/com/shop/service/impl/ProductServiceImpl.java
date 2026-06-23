@@ -85,4 +85,41 @@ public class ProductServiceImpl implements ProductService {
     public int countByKeyword(String keyword) {
         return productDao.countByKeyword(keyword);
     }
+
+    // ========== 后台统计 ==========
+
+    @Override
+    public int countByStatus(int status) {
+        return productDao.countByStatus(status);
+    }
+
+    @Override
+    public int sumSales() {
+        return productDao.sumSales();
+    }
+
+    @Override
+    public int sumStock() {
+        return productDao.sumStock();
+    }
+
+    @Override
+    public List<Product> getTopSales(int limit) {
+        return productDao.selectTopSales(limit);
+    }
+
+    @Override
+    public int countOrdersByStatus(String status) {
+        return productDao.countOrdersByStatus(status);
+    }
+
+    @Override
+    public java.math.BigDecimal sumOrderTotal() {
+        return productDao.sumOrderTotal();
+    }
+
+    @Override
+    public int countUsers() {
+        return productDao.countUsers();
+    }
 }

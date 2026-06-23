@@ -43,6 +43,22 @@ public class AdminController {
         return "admin/index";
     }
 
+    @RequestMapping("/stats")
+    public String stats(Model model) {
+        model.addAttribute("productCount", productService.countByStatus(1));
+        model.addAttribute("offProductCount", productService.countByStatus(0));
+        model.addAttribute("totalSales", productService.sumSales());
+        model.addAttribute("totalStock", productService.sumStock());
+        model.addAttribute("userCount", productService.countUsers());
+        model.addAttribute("pendingOrders", productService.countOrdersByStatus("pending"));
+        model.addAttribute("paidOrders", productService.countOrdersByStatus("paid"));
+        model.addAttribute("shippedOrders", productService.countOrdersByStatus("shipped"));
+        model.addAttribute("completedOrders", productService.countOrdersByStatus("completed"));
+        model.addAttribute("orderTotal", productService.sumOrderTotal());
+        model.addAttribute("topProducts", productService.getTopSales(10));
+        return "admin/stats";
+    }
+
     // ==================== 商品管理 ====================
 
     @RequestMapping("/product/list")
